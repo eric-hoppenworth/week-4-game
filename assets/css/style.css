@@ -1,0 +1,86 @@
+html, body{
+	padding:0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+}
+#mainContent{
+	background: lightgreen;
+}
+
+h1 {
+	font-size: 30px;
+	color: #ccc;
+
+}
+
+
+/*panel stuff*/
+.panel{
+	position: fixed;
+	height: 100%;
+	width: 20%;
+	top:0;
+	padding: 20px;
+	border:1px solid black;
+}
+.thumbnail{
+	height:50px;
+	margin: 10px;
+	/*border:1px solid black;*/
+	width:auto;
+	clear:both;
+}
+.topRow{
+	height: 300px;
+}
+.topRow * {
+	float:left;
+}
+.thumbnailHolder{
+	height: 100%;
+	width: 80px;
+}
+
+/*UserSide*/
+#pnlUser{
+	left:0;
+	background: #000088;
+}
+#pnlUser .thumbnailHolder {
+	float:right;
+}
+#btnUser{
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100px;
+	width: 25px;
+	border:1px solid black;
+	background: #000088;
+	visibility: hidden;
+}
+
+
+
+
+
+/*Enemy side*/
+#pnlEnemy{
+	right:0;
+	background: #880000;
+}
+#pnlEnemy img {
+	float:right;
+}
+#btnEnemy{
+	position: fixed;
+	right: 0;
+	top: 0;
+	height: 100px;
+	width: 25px;
+	border:1px solid black;
+	background: #000088;
+	visibility: hidden;
+}
