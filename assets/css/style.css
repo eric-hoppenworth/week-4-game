@@ -12,7 +12,10 @@ html, body{
 h1 {
 	font-size: 30px;
 	color: #ccc;
-
+	margin:5px;
+}
+p {
+	font-size: 20px;
 }
 
 
@@ -24,6 +27,7 @@ h1 {
 	top:0;
 	padding: 20px;
 	border:1px solid black;
+	text-align: center;
 }
 .thumbnail{
 	height:50px;
@@ -61,7 +65,11 @@ h1 {
 	background: #000088;
 	visibility: hidden;
 }
-
+#leftSelect{
+	position: absolute;
+	bottom: 50px;
+	right: 15px;
+}
 
 
 
@@ -83,4 +91,9 @@ h1 {
 	border:1px solid black;
 	background: #000088;
 	visibility: hidden;
+}
+#rightSelect{
+	position: absolute;
+	bottom: 50px;
+	left: 15px;
 }
