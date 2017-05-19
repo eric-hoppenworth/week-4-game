@@ -6,7 +6,9 @@ html, body{
 	box-sizing: border-box;
 }
 #mainContent{
-	background: lightgreen;
+	background-image: url("../images/arena.png");
+	height:100%;
+	width:100%;
 }
 
 h1 {
