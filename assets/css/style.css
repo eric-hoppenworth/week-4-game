@@ -57,17 +57,7 @@ p {
 #pnl0 .thumbnailHolder {
 	float:right;
 }
-/*This is not used*/
-#btn0{
-	position: fixed;
-	left: 0;
-	top: 0;
-	height: 100px;
-	width: 25px;
-	border:1px solid black;
-	background: #000088;
-	display: none;
-}
+
 #Select0{
 	position: absolute;
 	bottom: 50px;
@@ -87,17 +77,7 @@ p {
 #pnl1 img {
 	float:right;
 }
-/*This is not used*/
-#btn1{
-	position: fixed;
-	right: 0;
-	top: 0;
-	height: 100px;
-	width: 25px;
-	border:1px solid black;
-	background: #000088;
-	display: none;
-}
+
 #Select1{
 	position: absolute;
 	bottom: 50px;
@@ -161,4 +141,27 @@ p {
 }
 .healthBar:nth-child(2){
 	left:0;
+}
+
+/*game over screen*/
+#gameOver{
+	position: absolute;
+	width:50%;
+	left:25%;
+	background: #f00;
+	height: 40%;
+	top:20%;
+	text-align: center;
+	display: none;
+}
+#gameOver h1{
+	position: relative;
+	top:50%;
+	transform: translateY(-50%);
+	font-size: 50px;
+}
+#gameOver p{
+	position: relative;
+	top:50%;
+
 }

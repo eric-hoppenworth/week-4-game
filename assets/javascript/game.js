@@ -74,6 +74,7 @@ $(document).ready(function(){
 			//if it is the user player display a gameover message and hide any buttons
 			if (this === myGame.myFighter){
 				//game OVER
+				myGame.lose();
 			} else{
 				//if it is the enemy player, show the panels
 				//clear HTML
@@ -117,9 +118,6 @@ $(document).ready(function(){
 		this.fightButton = $("#Select1");
 		this.buttons = [this.selectButton,this.fightButton];
 		this.buttons[1].hide();
-		//other buttons(maybe not using this)
-		//this.toggleUser = $("#btnUser")
-		//this.toggleEnemy = $("#btnEnemy")
 
 		//panels
 		this.pnlUser = $("#pnl0");
@@ -135,13 +133,15 @@ $(document).ready(function(){
 			myGame.panels[1].hide();
 			myGame.panels[0].show();
 			myGame.panels[0].css("left","40%");
-			myGame.panels[0].append("<br><h1>Your final Stats</h1>");
+			myGame.panels[0].append("<br><h1>Your Final Stats</h1>");
 			myGame.panels[0].append("<br><h1>Congrats!</h1>");
 			$('#mainContent').hide();
 			myGame.myFighter.myStatsHtml[0].css("margin-left", "40%");
 			myGame.myFighter.myStatsHtml[0].css("margin-top", "10%");
 		}
 		this.lose = function(){
+			//
+			$('#gameOver').show();
 
 		}
 		$(".thumbnail").on("click",function(event){
