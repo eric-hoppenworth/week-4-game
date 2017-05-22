@@ -1,7 +1,10 @@
 var myGame;
-var healths = [100,120,130,80];
-var atts = [10,20,20,40];
-var growths = [15,5,10,5];
+// var healths = [100,120,130,80];
+// var atts = [10,20,20,40];
+// var growths = [15,5,10,5];
+var healths = [100,135,175,100];
+var atts = [10,15,15,45];
+var growths = [15,9,5,1];
 var firstClick = false;
 var canShow = false;
 
