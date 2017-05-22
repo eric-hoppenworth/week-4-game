@@ -32,15 +32,17 @@ $(document).ready(function(){
 				this.growth = 0;
 			}
 			//also, grab HTML elements and images
+			//grab HTML elements
+				//picture,HP,Att,Growth, health bar
+			this.myStatsHtml = [$("#Pic"+this.team),$("#HP"+this.team),$("#Att"+this.team),$("#Growth"+this.team),$("#healthBar"+this.team)];
 			if (team === 0){
-				//grab HTML elements
-				//picture,HP,Att,Growth
-				this.myStatsHtml = [$("#leftPic"),$("#leftHP"),$("#leftAtt"),$("#leftGrowth")];
+				
+				//this.myStatsHtml = [$("#leftPic"),$("#leftHP"),$("#leftAtt"),$("#leftGrowth"),$("#healthBar0")];
 				this.imgSrc = "assets/images/" + this.myClass + "L.png";
 			} else if(team === 1){
 				//grab HTML elements
 				//picture,HP,Att,Growth
-				this.myStatsHtml = [$("#rightPic"),$("#rightHP"),$("#rightAtt"),$("#rightGrowth")];
+				//this.myStatsHtml = [$("#rightPic"),$("#rightHP"),$("#rightAtt"),$("#rightGrowth"),$("#healthBar1")];
 				this.imgSrc = "assets/images/" + this.myClass + "R.png";
 			}
 			
@@ -69,9 +71,7 @@ $(document).ready(function(){
 			});
 			
 		};
-		levelUp(){
 
-		};
 		die(){
 
 		};
@@ -83,6 +83,7 @@ $(document).ready(function(){
 			this.myStatsHtml[1].text(this.health + " / " + this.hitPoints);
 			this.myStatsHtml[2].text(this.attackPower + " + " + value);
 			this.myStatsHtml[3].text(this.growth);
+			this.myStatsHtml[4].css("width",this.health/this.hitPoints*100 + "%")
 			//should also update health bars
 		};
 	};
@@ -92,16 +93,16 @@ $(document).ready(function(){
 		this.myFighter = 0;
 		//grab HTML elements for things in the game
 		//buttons
-		this.selectButton = $("#leftSelect");
-		this.fightButton = $("#rightSelect");
+		this.selectButton = $("#Select0");
+		this.fightButton = $("#Select1");
 		//other buttons(maybe not using this)
 		//this.toggleUser = $("#btnUser")
 		//this.toggleEnemy = $("#btnEnemy")
 
 		//panels
-		this.pnlUser = $("#pnlUser");
-		this.pnlEnemy = $("#pnlEnemy");
-		//this.pnlEnemy.hide();
+		this.pnlUser = $("#pnl0");
+		this.pnlEnemy = $("#pnl1");
+		
 		//fighting areas
 		this.arena = $("#arena");
 		this.attackButton = $('#attackButton');
@@ -163,7 +164,7 @@ $(document).ready(function(){
 			//hide fight button
 			myGame.fightButton.hide();
 			//show Health bars
-			//health bars are not yet created
+			$("#healthBars").show();
 			
 			//show attackButton
 			myGame.attackButton.show();

@@ -50,15 +50,15 @@ p {
 }
 
 /*UserSide*/
-#pnlUser{
+#pnl0{
 	left:0;
 	background: #000088;
 }
-#pnlUser .thumbnailHolder {
+#pnl0 .thumbnailHolder {
 	float:right;
 }
 /*This is not used*/
-#btnUser{
+#btn0{
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -68,7 +68,7 @@ p {
 	background: #000088;
 	display: none;
 }
-#leftSelect{
+#Select0{
 	position: absolute;
 	bottom: 50px;
 	right: 15px;
@@ -79,16 +79,16 @@ p {
 
 
 /*Enemy side*/
-#pnlEnemy{
+#pnl1{
 	right:0;
 	background: #880000;
 	display: none;
 }
-#pnlEnemy img {
+#pnl1 img {
 	float:right;
 }
 /*This is not used*/
-#btnEnemy{
+#btn1{
 	position: fixed;
 	right: 0;
 	top: 0;
@@ -98,7 +98,7 @@ p {
 	background: #000088;
 	display: none;
 }
-#rightSelect{
+#Select1{
 	position: absolute;
 	bottom: 50px;
 	left: 15px;
@@ -130,12 +130,14 @@ p {
 	transform: translate(-50%,-50%);
 	display: none;
 }
+/*health bars for each unit*/
 #healthBars{
 	position: absolute;
 	top: 85%;
 	left:40%;
 	height: 40px;
 	width: 300px;
+	display: none;
 
 }
 .backBar{
@@ -153,9 +155,10 @@ p {
 	background: yellow;
 	width:100%;
 	height: 100%;
-	float: left;
+	position: relative;
+	left:0;
 
 }
 .healthBar:nth-child(2){
-	float:right;
+	left:0;
 }
