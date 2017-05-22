@@ -1,4 +1,8 @@
 var myGame;
+var healths = [100,120,130,80];
+var atts = [10,20,20,40];
+var growths = [15,5,10,5];
+var firstClick = false;
 
 $(document).ready(function(){
 	//constructor for the fighter class.
@@ -15,45 +19,36 @@ $(document).ready(function(){
 			this.team = team;
 			//0 for player team (left)
 			//1 for enemy team (right)
-			if( myClass === 0 ){
+			//set arena position HTML element
+			this.position = $("#arena"+this.team)
+
+			this.hitPoints = healths[this.myClass];
+			this.health = this.hitPoints;
+			this.attackPower = atts[this.myClass];
+			this.growth = growths[this.myClass];
+			if( myClass === 0 ){	
 				//sword
 				//mid HP
 				//low Att
 				//high Growth
-				this.hitPoints = 100;
-				this.health = this.hitPoints;
-				this.attackPower = 10;
-				this.growth = 10;
 				this.className = "sword";
 			} else if( myClass === 1 ){
 				//axe
 				//mid HP
 				//mid Att
 				//mid Growth
-				this.hitPoints = 120;
-				this.health = this.hitPoints;
-				this.attackPower = 20;
-				this.growth = 5;
 				this.className = "axe";
 			} else if( myClass === 2 ){
 				//lance
 				//high HP
 				//mid Att
 				//mid Growth
-				this.hitPoints = 130;
-				this.health = this.hitPoints;
-				this.attackPower = 20;
-				this.growth = 10;
 				this.className = "lance";
 			} else if( myClass === 3 ){
 				//mage
 				//low HP
 				//high Att
 				//low Growth
-				this.hitPoints = 80;
-				this.health = this.hitPoints;
-				this.attackPower = 40;
-				this.growth = 5;
 				this.className = "mage";
 			}
 
@@ -87,7 +82,23 @@ $(document).ready(function(){
 
 	function Game() {
 		this.unit = 0;
-		this.myFighter;
+		this.myFighter = 0;
+		//grab HTML elements for things in the game
+		//buttons
+		this.selectButton = $("#leftSelect");
+		this.fightButton = $("#rightSelect");
+		//other buttons(maybe not using this)
+		//this.toggleUser = $("#btnUser")
+		//this.toggleEnemy = $("#btnEnemy")
+
+		//panels
+		this.pnlUser = $("#pnlUser");
+		this.pnlEnemy = $("#pnlEnemy");
+		//this.pnlEnemy.hide();
+		//fighting areas
+		this.arena = $("#arena");
+
+		//depricated
 		//create four object, one of each class.
 		//they will all start as team = 1
 		// this.fighters = [];
@@ -104,16 +115,29 @@ $(document).ready(function(){
 
 			var myUnit = new Fighter(parseInt($(this).attr("data-class"),10),parseInt($(this).attr("data-team"),10));
 			//change HTML
+			var value = myUnit.attackCount * myUnit.growth
+
 			myUnit.myStatsHtml[0].attr("src",myUnit.imgSrc);
 			myUnit.myStatsHtml[1].text(myUnit.health + " / " + myUnit.hitPoints);
-			myUnit.myStatsHtml[2].text(myUnit.attackPower + " + " + (myUnit.attackCount*myUnit.growth));
+			myUnit.myStatsHtml[2].text(myUnit.attackPower + " + " + value);
 			myUnit.myStatsHtml[3].text(myUnit.growth);
 
+			//show select button, only if a unit is not already selected
+			if (firstClick === false ){
+				myGame.selectButton.show();
+			}
+			firstClick = true;
 		});
 
-		$("#leftSelect").on("click",function(){
+		this.selectButton.on("click",function(){
 			//set actual character and hide all select buttons
 			myGame.myFighter = new Fighter(myGame.unit,0)
+			//hide select button
+			$(this).hide();
+			//show enemy panel
+			myGame.pnlEnemy.show();
+			//hide all thumbnails on player panel
+			myGame.pnlUser.find(".thumbnailHolder").hide();
 
 		});
 	};

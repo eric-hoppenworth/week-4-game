@@ -71,6 +71,7 @@ p {
 	position: absolute;
 	bottom: 50px;
 	right: 15px;
+	display: none;
 }
 
 
@@ -80,6 +81,7 @@ p {
 #pnlEnemy{
 	right:0;
 	background: #880000;
+	display: none;
 }
 #pnlEnemy img {
 	float:right;
@@ -98,4 +100,14 @@ p {
 	position: absolute;
 	bottom: 50px;
 	left: 15px;
+}
+
+/*Main Contenet*/
+#arena{
+	border:1px solid black;
+	width:20%;
+	height: auto;
+	position: relative;
+	top: 70%;
+	left: 40%;
 }
