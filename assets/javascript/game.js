@@ -1,5 +1,4 @@
 var myGame;
-var 
 
 $(document).ready(function(){
 	//constructor for the fighter class.
@@ -87,25 +86,34 @@ $(document).ready(function(){
 	};
 
 	function Game() {
+		this.unit = 0;
+		this.myFighter;
 		//create four object, one of each class.
-		//they will all start as team = 0
-		this.fighters = [];
-		for (i =0;i < 4; i ++){
-			this.fighters[i] = new Fighter(i,0);
-		}
+		//they will all start as team = 1
+		// this.fighters = [];
+		// for (i =0;i < 4; i ++){
+		// 	this.fighters[i] = new Fighter(i,1);
+		// }
 
 		$(".thumbnail").on("click",function(event){
 			//this click function will allow the user to see the stats of each character.
 			//you will NOT actually pick a character here, that is located in the 'select' button
 
 			//pull specific object
+			myGame.unit = parseInt($(this).attr("data-class"),10);
 
 			var myUnit = new Fighter(parseInt($(this).attr("data-class"),10),parseInt($(this).attr("data-team"),10));
 			//change HTML
 			myUnit.myStatsHtml[0].attr("src",myUnit.imgSrc);
 			myUnit.myStatsHtml[1].text(myUnit.health + " / " + myUnit.hitPoints);
-			myUnit.myStatsHtml[2].text(myUnit.attackPower + " + " + myUnit.growth);
+			myUnit.myStatsHtml[2].text(myUnit.attackPower + " + " + (myUnit.attackCount*myUnit.growth));
 			myUnit.myStatsHtml[3].text(myUnit.growth);
+
+		});
+
+		$("#leftSelect").on("click",function(){
+			//set actual character and hide all select buttons
+			myGame.myFighter = new Fighter(myGame.unit,0)
 
 		});
 	};
