@@ -57,6 +57,7 @@ p {
 #pnlUser .thumbnailHolder {
 	float:right;
 }
+/*This is not used*/
 #btnUser{
 	position: fixed;
 	left: 0;
@@ -65,7 +66,7 @@ p {
 	width: 25px;
 	border:1px solid black;
 	background: #000088;
-	visibility: hidden;
+	display: none;
 }
 #leftSelect{
 	position: absolute;
@@ -86,6 +87,7 @@ p {
 #pnlEnemy img {
 	float:right;
 }
+/*This is not used*/
 #btnEnemy{
 	position: fixed;
 	right: 0;
@@ -94,7 +96,7 @@ p {
 	width: 25px;
 	border:1px solid black;
 	background: #000088;
-	visibility: hidden;
+	display: none;
 }
 #rightSelect{
 	position: absolute;
@@ -104,10 +106,26 @@ p {
 
 /*Main Contenet*/
 #arena{
-	border:1px solid black;
-	width:20%;
-	height: auto;
+	width:300px;
+	height: 150px;
 	position: relative;
-	top: 70%;
+	top: 60%;
 	left: 40%;
+/*	border:1px solid black;*/
+}
+#arena img {
+	float:left;
+}
+/*right side image*/
+#arena img:nth-child(2) {
+	position: absolute;
+	right:0px;
+}
+#attackButton{
+	position: absolute;
+	width:100px;
+	top:50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	display: none;
 }
