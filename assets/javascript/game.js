@@ -3,7 +3,8 @@ var healths = [100,120,130,80];
 var atts = [10,20,20,40];
 var growths = [15,5,10,5];
 var firstClick = false;
-var animationComplete = false;
+var canShow = false;
+
 
 $(document).ready(function(){
 	//constructor for the fighter class.
@@ -33,16 +34,11 @@ $(document).ready(function(){
 			}
 			//also, grab HTML elements and images
 			//grab HTML elements
-				//picture,HP,Att,Growth, health bar
+			//picture,HP,Att,Growth, health bar
 			this.myStatsHtml = [$("#Pic"+this.team),$("#HP"+this.team),$("#Att"+this.team),$("#Growth"+this.team),$("#healthBar"+this.team)];
 			if (team === 0){
-				
-				//this.myStatsHtml = [$("#leftPic"),$("#leftHP"),$("#leftAtt"),$("#leftGrowth"),$("#healthBar0")];
 				this.imgSrc = "assets/images/" + this.myClass + "L.png";
 			} else if(team === 1){
-				//grab HTML elements
-				//picture,HP,Att,Growth
-				//this.myStatsHtml = [$("#rightPic"),$("#rightHP"),$("#rightAtt"),$("#rightGrowth"),$("#healthBar1")];
 				this.imgSrc = "assets/images/" + this.myClass + "R.png";
 			}
 			
@@ -73,7 +69,31 @@ $(document).ready(function(){
 		};
 
 		die(){
-
+			//remove from the arena
+			this.position.attr("src","")
+			//if it is the user player display a gameover message and hide any buttons
+			if (this === myGame.myFighter){
+				//game OVER
+			} else{
+				//if it is the enemy player, show the panels
+				//clear HTML
+				for(var i = 0; i < this.myStatsHtml.length;i++){
+					if (i === 0 ){
+						this.myStatsHtml[i].attr("src","")
+					} else {
+						this.myStatsHtml[i].empty();
+					}
+				}
+				myGame.panels[1].show();
+				//allow button to show
+				canShow = true;
+				//increase round count (this can help to determine when all are dead)
+				myGame.round += 1;
+				if (myGame.round === 4){
+					//You WIN
+					myGame.win();
+				}
+			}
 		};
 		showStats(){
 			//change HTML
@@ -83,18 +103,20 @@ $(document).ready(function(){
 			this.myStatsHtml[1].text(this.health + " / " + this.hitPoints);
 			this.myStatsHtml[2].text(this.attackPower + " + " + value);
 			this.myStatsHtml[3].text(this.growth);
+			//update health bars
 			this.myStatsHtml[4].css("width",this.health/this.hitPoints*100 + "%")
-			//should also update health bars
 		};
 	};
 
 	function Game() {
 		this.unit = 0;
-		this.myFighter = 0;
+		this.round =1;
 		//grab HTML elements for things in the game
 		//buttons
 		this.selectButton = $("#Select0");
 		this.fightButton = $("#Select1");
+		this.buttons = [this.selectButton,this.fightButton];
+		this.buttons[1].hide();
 		//other buttons(maybe not using this)
 		//this.toggleUser = $("#btnUser")
 		//this.toggleEnemy = $("#btnEnemy")
@@ -102,11 +124,26 @@ $(document).ready(function(){
 		//panels
 		this.pnlUser = $("#pnl0");
 		this.pnlEnemy = $("#pnl1");
-		
+		this.panels = [this.pnlUser,this.pnlEnemy];
+
 		//fighting areas
 		this.arena = $("#arena");
 		this.attackButton = $('#attackButton');
 
+		
+		this.win = function(){
+			myGame.panels[1].hide();
+			myGame.panels[0].show();
+			myGame.panels[0].css("left","40%");
+			myGame.panels[0].append("<br><h1>Your final Stats</h1>");
+			myGame.panels[0].append("<br><h1>Congrats!</h1>");
+			$('#mainContent').hide();
+			myGame.myFighter.myStatsHtml[0].css("margin-left", "40%");
+			myGame.myFighter.myStatsHtml[0].css("margin-top", "10%");
+		}
+		this.lose = function(){
+
+		}
 		$(".thumbnail").on("click",function(event){
 			//this click function will allow the user to see the stats of each character.
 			//you will NOT actually pick a character here, that is located in the 'select' button
@@ -119,7 +156,10 @@ $(document).ready(function(){
 			var myUnit = new Fighter(parseInt($(this).attr("data-class"),10),parseInt($(this).attr("data-team"),10));
 			myUnit.showStats();
 			
-
+			if (canShow === true){
+				myGame.panels[0].show();
+				myGame.buttons[1].show();
+			}
 			//show select button, only if a unit is not already selected
 			if (firstClick === false ){
 				myGame.selectButton.show();
@@ -127,13 +167,16 @@ $(document).ready(function(){
 			firstClick = true;
 		});
 
-		this.selectButton.on("click",function(){
+
+		//on click for user button
+		this.buttons[0].on("click",function(){
 			//set actual character and hide all select buttons
 			myGame.myFighter = new Fighter(myGame.unit,0)
 			//hide select button
 			$(this).hide();
 			//show enemy panel
 			myGame.pnlEnemy.show();
+			canShow = true;
 			//hide all thumbnails on player panel
 			myGame.pnlUser.find(".thumbnailHolder").hide();
 			//move character to arena
@@ -149,7 +192,9 @@ $(document).ready(function(){
 
 		});
 
-		this.fightButton.on("click",function(){
+		
+		//onclick for enemy button
+		this.buttons[1].on("click",function(){
 			//bring the enemy onto the board, and hide the button
 			myGame.myEnemy = new Fighter(myGame.unit,1);
 			$("#arena1").attr("src",myGame.myEnemy.imgSrc)
@@ -163,16 +208,15 @@ $(document).ready(function(){
 			});
 			//hide fight button
 			myGame.fightButton.hide();
+			canShow = false;
 			//show Health bars
 			$("#healthBars").show();
 			
 			//show attackButton
 			myGame.attackButton.show();
 			//hide panels
-			//myGame.pnlEnemy.hide();
-			//cmyGame.pnlUser.hide();
-			//enemy is not dead
-			myGame.isDead = false;
+			myGame.pnlEnemy.hide();
+			myGame.pnlUser.hide();
 		});
 
 		this.attackButton.on("click",function(){

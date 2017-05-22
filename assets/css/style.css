@@ -4,9 +4,9 @@ html, body{
 	width: 100%;
 	height: 100%;
 	box-sizing: border-box;
+	background-image: url("../images/arena.png");
 }
 #mainContent{
-	background-image: url("../images/arena.png");
 	height:100%;
 	width:100%;
 }
