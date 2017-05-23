@@ -25,7 +25,7 @@ $(document).ready(function(){
 			//0 for player team (left)
 			//1 for enemy team (right)
 			//set arena position HTML element
-			this.position = $("#arena"+this.team)
+			this.position = $("#arena"+this.team);
 
 			this.hitPoints = healths[this.myClass];
 			this.health = this.hitPoints;
@@ -50,7 +50,7 @@ $(document).ready(function(){
 		//methods
 		fight(enemy){
 			//because using 'this' inside the animate call back will grab the image element
-			var me = this
+			var me = this;
 			//animate the active unit
 			this.position.animate({'left' : '-=20px'},200);
 			this.position.animate({'left' : '+=40px'},200);
@@ -73,7 +73,7 @@ $(document).ready(function(){
 
 		die(){
 			//remove from the arena
-			this.position.attr("src","")
+			this.position.attr("src","");
 			//if it is the user player display a gameover message and hide any buttons
 			if (this === myGame.myFighter){
 				//game OVER
@@ -83,7 +83,7 @@ $(document).ready(function(){
 				//clear HTML
 				for(var i = 0; i < this.myStatsHtml.length;i++){
 					if (i === 0 ){
-						this.myStatsHtml[i].attr("src","")
+						this.myStatsHtml[i].attr("src","");
 					} else {
 						this.myStatsHtml[i].empty();
 					}
@@ -101,14 +101,14 @@ $(document).ready(function(){
 		};
 		showStats(){
 			//change HTML
-			var value = this.attackCount * this.growth
+			var value = this.attackCount * this.growth;
 
 			this.myStatsHtml[0].attr("src",this.imgSrc);
 			this.myStatsHtml[1].text(this.health + " / " + this.hitPoints);
 			this.myStatsHtml[2].text(this.attackPower + " + " + value);
 			this.myStatsHtml[3].text(this.growth);
 			//update health bars
-			this.myStatsHtml[4].css("width",this.health/this.hitPoints*100 + "%")
+			this.myStatsHtml[4].css("width",this.health/this.hitPoints*100 + "%");
 		};
 	};
 
@@ -174,7 +174,7 @@ $(document).ready(function(){
 		//on click for user button
 		this.buttons[0].on("click",function(){
 			//set actual character and hide all select buttons
-			myGame.myFighter = new Fighter(myGame.unit,0)
+			myGame.myFighter = new Fighter(myGame.unit,0);
 			//hide select button
 			$(this).hide();
 			//show enemy panel
@@ -183,7 +183,7 @@ $(document).ready(function(){
 			//hide all thumbnails on player panel
 			myGame.pnlUser.find(".thumbnailHolder").hide();
 			//move character to arena
-			$("#arena0").attr("src",myGame.myFighter.imgSrc)
+			$("#arena0").attr("src",myGame.myFighter.imgSrc);
 			//hide corresponding thumbnail on enemy side
 			var holder = myGame.pnlEnemy.find(".thumbnailHolder");
 			holder.children().each(function(){
@@ -200,7 +200,7 @@ $(document).ready(function(){
 		this.buttons[1].on("click",function(){
 			//bring the enemy onto the board, and hide the button
 			myGame.myEnemy = new Fighter(myGame.unit,1);
-			$("#arena1").attr("src",myGame.myEnemy.imgSrc)
+			$("#arena1").attr("src",myGame.myEnemy.imgSrc);
 			//hide corresponding thumbnail
 			var holder = myGame.pnlEnemy.find(".thumbnailHolder");
 			holder.children().each(function(){

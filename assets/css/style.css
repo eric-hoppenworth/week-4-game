@@ -5,6 +5,7 @@ html, body{
 	height: 100%;
 	box-sizing: border-box;
 	background-image: url("../images/arena.png");
+	background-size: 100%;
 }
 #mainContent{
 	height:100%;
@@ -100,6 +101,7 @@ p {
 #arena img {
 	position: absolute;
 	/*float:left;*/
+	/*causing a bug in safari*/
 }
 /*right side image*/
 #arena img:nth-child(2) {
