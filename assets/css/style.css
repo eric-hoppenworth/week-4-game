@@ -18,6 +18,7 @@ h1 {
 }
 p {
 	font-size: 20px;
+	/*color: #222;*/
 }
 
 
@@ -52,17 +53,18 @@ p {
 /*UserSide*/
 #pnl0{
 	left:0;
-	background: #000088;
+	background: #134eaf;
 }
 #pnl0 .thumbnailHolder {
 	float:right;
 }
 
 #Select0{
-	position: absolute;
-	bottom: 50px;
-	right: 15px;
+	position: relative;
+	top:10px;
 	display: none;
+	height: 50px;
+	width: 200px;
 }
 
 
@@ -79,9 +81,11 @@ p {
 }
 
 #Select1{
-	position: absolute;
-	bottom: 50px;
-	left: 15px;
+	position: relative;
+	top:10px;
+	display: none;
+	height: 50px;
+	width: 200px;
 }
 
 /*Main Contenet*/
@@ -95,7 +99,7 @@ p {
 }
 #arena img {
 	position: absolute;
-	float:left;
+	/*float:left;*/
 }
 /*right side image*/
 #arena img:nth-child(2) {
